@@ -1,0 +1,72 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+	public static void Main()
+	{
+		string s = "aabaabaa";
+		string ptr = "aaba";
+		int i = 0, j = 0, k = ptr.Length, count = 0;
+		int ans = 0;
+		Dictionary<char, int> dt = new Dictionary<char, int>();
+		foreach (var a in ptr)
+		{
+			if (!dt.ContainsKey(a))
+			{
+				dt.Add(a, 1);
+			}
+			else
+			{
+				dt[a]++;
+			}
+		}
+
+		count = dt.Keys.Count;
+		int nonChangeCount = count;
+		while (j < s.Length)
+		{
+			if ((j - i ) == k)
+			{
+				var ch = s[i++];
+				if (dt.ContainsKey(ch))
+				{
+					if (dt[ch] == 0)
+					{
+						count++;
+					}
+
+					dt[ch]++;
+				}
+				var nextCh = s[j++];
+				if (dt.ContainsKey(nextCh))
+				{
+					dt[nextCh]--;
+					if (dt[nextCh] == 0)
+					{
+						count--;
+					}
+				}
+			}
+			else
+			{
+				var ch = s[j++];
+				if (dt.ContainsKey(ch))
+				{
+					dt[ch]--;
+					if (dt[ch] == 0)
+					{
+						count--;
+					}
+				}
+			}
+
+			if (count == 0)
+			{
+				ans++;
+			}
+		}
+
+		Console.WriteLine(ans);
+	}
+}
