@@ -1,0 +1,29 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		int[] arr = {0,0,0,0,0};
+		int goal = 0;
+		int i=0,j=0;
+		int sum =0;
+		int max_size =0;
+		while(j<arr.Length){
+			sum += arr[j];
+			Console.WriteLine("i" + i.ToString() + " j"+j.ToString() + " sum" +sum.ToString());
+			if(sum == goal){
+				max_size++;
+			}
+			if(j == (arr.Length-1) || sum > goal){
+				i++;
+				j=i;
+				sum=0;
+			}else{
+				j++;
+			}
+			
+		}
+		Console.WriteLine("Max_Length" + max_size.ToString());
+	}
+}
