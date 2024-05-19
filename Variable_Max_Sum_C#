@@ -1,0 +1,26 @@
+using System;
+public class HelloWorld
+{
+    public static void Main(string[] args)
+    {
+        int[] arr= {1,2,3,4,5,6};
+        int k=3;
+        int startIndex=0,endIndex=0,sum=0;
+        int highestSum=0;
+        while(endIndex < arr.Length){
+            if((endIndex-startIndex) < k){
+                sum+=arr[endIndex++];
+            }else{
+                sum+=arr[endIndex++];
+                sum-= arr[startIndex++];
+            }
+            if(highestSum < sum)
+            {
+                highestSum = sum;
+             Console.WriteLine($"startIndex {startIndex} endIndex {endIndex} highestSum {highestSum}");
+            }
+            
+        }
+        Console.WriteLine ("Highest Sum : " + highestSum.ToString());
+    }
+}
