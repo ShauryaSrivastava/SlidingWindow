@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+	public static void Main()
+	{
+		int[] arr =
+		{
+			1,
+			2,
+			3,
+			1,
+			4,
+			5,
+			2,
+			3,
+			6
+		};
+		int k = 3;
+		Stack<int> myQueue = new Stack<int>();
+		myQueue.Push(0);
+		int start = 0, end = 0;
+		while (end < arr.Length)
+		{
+			if ((end - start) < k)
+			{
+				if (myQueue.Peek() < arr[end])
+				{
+					myQueue.Pop();
+					myQueue.Push(arr[end++]);
+				}
+
+				Console.WriteLine("UpperBlock peek " + myQueue.Peek().ToString());
+			}
+			else
+			{
+				start++;
+				var newNumber = arr[end++];
+				Console.WriteLine("newNum " + newNumber.ToString());
+				var lastLargestNum = myQueue.Peek();
+				Console.WriteLine("Largest " + lastLargestNum.ToString());
+				if (newNumber > lastLargestNum)
+				{
+					myQueue.Push(newNumber);
+				}
+				else
+				{
+					myQueue.Push(lastLargestNum);
+				}
+			}
+		}
+
+		while (myQueue.Count > 0)
+		{
+			Console.WriteLine(myQueue.Pop());
+		}
+	}
+}
