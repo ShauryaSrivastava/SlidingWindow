@@ -1,59 +1,29 @@
 using System;
-using System.Collections.Generic;
-
+using System.Collections.Generic;		
 public class Program
 {
 	public static void Main()
 	{
-		int[] arr =
-		{
-			1,
-			2,
-			3,
-			1,
-			4,
-			5,
-			2,
-			3,
-			6
-		};
-		int k = 3;
-		Stack<int> myQueue = new Stack<int>();
-		myQueue.Push(0);
-		int start = 0, end = 0;
-		while (end < arr.Length)
-		{
-			if ((end - start) < k)
-			{
-				if (myQueue.Peek() < arr[end])
-				{
-					myQueue.Pop();
-					myQueue.Push(arr[end++]);
-				}
-
-				Console.WriteLine("UpperBlock peek " + myQueue.Peek().ToString());
-			}
-			else
-			{
-				start++;
-				var newNumber = arr[end++];
-				Console.WriteLine("newNum " + newNumber.ToString());
-				var lastLargestNum = myQueue.Peek();
-				Console.WriteLine("Largest " + lastLargestNum.ToString());
-				if (newNumber > lastLargestNum)
-				{
-					myQueue.Push(newNumber);
-				}
-				else
-				{
-					myQueue.Push(lastLargestNum);
-				}
-			}
+		int[] arr = { 1, 3, -1, -3, 5, 3, 6, 7};
+		int k=3;
+		int i=0,j=0;
+		Queue<int> q = new Queue<int>();
+		while(j< arr.Length){
+		if((j-i) < k){
+		var newVal = arr[j++];
+		while(q.Count > 0 && q.Peek() < newVal){
+			q.Dequeue();
 		}
-
-		while (myQueue.Count > 0)
-		{
-			Console.WriteLine(myQueue.Pop());
+			q.Enqueue(newVal);
+		}else{
+			Console.WriteLine("Maximum " + q.Peek().ToString());
+			var removeVal = arr[i++];
+			if(removeVal == q.Peek()){ q.Dequeue(); }
+			var addVal = arr[j++];
+			while(q.Count>0 && q.Peek() < addVal){q.Dequeue();}
+			q.Enqueue(addVal);
+		}
+			
 		}
 	}
 }
