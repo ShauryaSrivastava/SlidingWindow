@@ -1,0 +1,41 @@
+//input: aabacbebe
+//output: Longest SubString With 3 Unique Character : aabacbebe
+
+
+using System;
+using System.Collections.Generic;					
+public class Program
+{
+	public static void Main()
+	{
+		string arr = "aabacbebe";
+		int k=3;
+		Dictionary<char,int> dic = new Dictionary<char,int>();
+		int i=0,j=0,h=0;
+		while(j< arr.Length)
+		{
+			var ch = arr[j];
+			if(!dic.ContainsKey(ch)){ dic.Add(ch,1); }
+			else{dic[ch]++; }
+			if(dic.Keys.Count > k){
+				while(dic.Keys.Count>k){
+					var rCh = arr[i++];
+					dic[rCh]--;
+					if(dic[rCh]==0){
+					 dic.Remove(rCh);
+					}
+				}
+			}
+			if(dic.Keys.Count == k){
+			 if(h < (j-i+1))
+			 {
+				 Console.WriteLine("start:" + i.ToString() + "|end:" + j.ToString());
+				 h= j-i+1;
+			 }
+			}
+			j++;
+		}
+		Console.WriteLine(h);
+		
+	}
+}
