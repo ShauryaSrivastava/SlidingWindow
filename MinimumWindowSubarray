@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+	public static void Main()
+	{
+		string s = "TOTMTAPTAT";
+		string ss = "TAT";
+		Dictionary<char, int> dic = new Dictionary<char, int>();
+		int count = 0;
+		
+		foreach (var ch in ss)
+		{
+			if (!dic.ContainsKey(ch))
+			{
+				dic.Add(ch, 1);
+			}
+			else
+			{
+				dic[ch]++;
+			}
+		}
+		int i=0,j=0, smallestWindow = 1000;
+		int start=0,end=0;
+		count = dic.Keys.Count;
+		while(j < s.Length){
+			var pCh = s[j];
+			if(dic.ContainsKey(pCh)){
+			 	dic[pCh]--;
+				if(dic[pCh] == 0){
+					count--;
+				}
+			}
+			if(count == 0){
+				while(count == 0){
+					if(smallestWindow > (j-i+1)){
+					smallestWindow = j-i+1;
+					start = i;
+					end =j;
+					Console.WriteLine(smallestWindow.ToString() + " S " + start.ToString() + " E "+end.ToString());
+					}
+					var rCh = s[i];
+					if(dic.ContainsKey(rCh)){
+						dic[rCh]++;
+						if(dic[rCh]>0){
+						 count++;
+						}
+					}
+					i++;
+				}
+			}
+			j++;
+		}
+		
+	}
+}
